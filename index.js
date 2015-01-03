@@ -1,9 +1,16 @@
 function Class(attrs, baseClass){
   if (attrs['initialize']){
-    return attrs['initialize'];
+    var constructor = attrs['initialize'];
   } else {
-    return function(){};
+    var constructor = function(){};
   }
+  var propertyNames = Object.keys(attrs);
+  propertyNames.forEach(function(property){
+    if(property != 'initialize'){
+      constructor.prototype[property] = attrs[property];
+    }
+  })
+  return constructor;
 }
 
 module.exports = Class;
