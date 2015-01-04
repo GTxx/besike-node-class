@@ -14,6 +14,9 @@ function Class(attrs, baseClass){
   if (baseClass) {
     constructor.prototype.constructor.prototype = baseClass.prototype;
     constructor.prototype.constructor = constructor;
+    constructor.__super__ = baseClass;
+  } else{
+    constructor.__super__ = Object;
   }
   return constructor;
 }
