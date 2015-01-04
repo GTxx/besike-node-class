@@ -10,7 +10,11 @@ function Class(attrs, baseClass){
       constructor.prototype[property] = attrs[property];
     }
   })
+
+  if (baseClass) {
+    constructor.prototype.constructor.prototype = baseClass.prototype;
+    constructor.prototype.constructor = constructor;
+  }
   return constructor;
 }
-
 module.exports = Class;
